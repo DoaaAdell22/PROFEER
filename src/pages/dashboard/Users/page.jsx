@@ -9,7 +9,7 @@ const Page = () => {
     const navigate = useNavigate()
     const [users, setUsers] = useState([]);
     const idToken = useSelector(state => state.Auth.idToken);
-
+    const [loading , setLoading] = useState(false)
     const columns = [
         {
             title: 'id',
@@ -66,7 +66,7 @@ const Page = () => {
 
     return (
         <div>
-            <Table columns={columns} dataSource={users} />
+            <Table loading={loading} columns={columns} dataSource={users} />
         </div>
     );
 };
