@@ -15,12 +15,7 @@ const page = () => {
   
 
     const items = [
-        {
-          key: '1',
-          label: 'Id',
-          span : 3 ,
-          children: data.id,
-        },
+
         {
           key: '2',
           label: 'Name',

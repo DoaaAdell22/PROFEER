@@ -1,14 +1,13 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
-import { Button , Form , Input , message} from 'antd';
+import { Button , Form , Input , InputNumber, message , Select} from 'antd';
 import { useSelector } from "react-redux";
 
 
 const page = () => {
     const [loading , setLoading] = useState(false)
     const idToken = useSelector(state => state.Auth.idToken);
-
 
 
     const navigate = useNavigate()
@@ -34,6 +33,21 @@ const page = () => {
                     message.err('failed added')
                 })
         }  
+
+
+        const categories = [
+
+            {id:1, name_en:"Outlets" , name_ar:"Outlets"} ,
+            {id:2, name_en:"AC Switch" , name_ar:"AC Switch"} ,
+            {id:3, name_en:"TELE Point" , name_ar:"TELE Point"} ,
+            {id:4, name_en:"Data Point" , name_ar:"Data Point"} ,
+            {id:5, name_en:"Bath Tub" , name_ar:"Bath Tub"} ,
+            {id:6, name_en:"Water Sink" , name_ar:"Water Sink"} ,
+            {id:7, name_en:"Water Mixer" , name_ar:"Water Mixer"} ,
+            {id:8, name_en:"Toilet Cabinet" , name_ar:"Toilet Cabinet"} ,
+            {id:9, name_en:"Water Heater" , name_ar:"Water Heater"} ,
+          ]
+        
 
     return (
     <div>
@@ -68,7 +82,7 @@ const page = () => {
                     message:'please Enter price'
                 }
                 ]}>
-            <Input size='large' placeholder='please Enter price' />
+            <InputNumber className='w-full' size='large' placeholder='please Enter price' />
             </Form.Item>
             <Form.Item
             label={'percentage'} name={"percentage"}
@@ -78,7 +92,7 @@ const page = () => {
                     message:'please Enter percentage'
                 }
                 ]}>
-            <Input size='large' placeholder='please Enter percentage	' />
+            <InputNumber className='w-full' size='large' placeholder='please Enter percentage	' />
             </Form.Item>
             <Form.Item
             label={'category'} name={"category"}
@@ -88,19 +102,18 @@ const page = () => {
                     message:'please Enter category'
                 }
                 ]}>
-            <Input size='large' placeholder='please Enter category' />
+                <Select
+                placeholder="Select a categories"
+                loading={loading}
+              >
+                {categories.map(categories => (
+                  <Option key={categories.id} value={categories.id}>
+                    {categories.name}
+                  </Option>
+                ))}
+              </Select>
             </Form.Item>
-            <Form.Item
-            label={'Created_at'} name={"created_at"}
-            rules={[
-                {
-                    required : true,
-                    message:'please Enter Created_at'
-                }
-                ]}>
-            <Input size='large' placeholder='please Enter Created_at' />
-            </Form.Item>
-            <Button loading={loading} htmlType='submit'>Add</Button>
+            <Button loading={loading} htmlType='submit' type='primary'>Add</Button>
             </Form>
     </div> 
   )

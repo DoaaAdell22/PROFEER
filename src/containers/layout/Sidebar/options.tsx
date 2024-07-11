@@ -96,24 +96,6 @@ const getMenuItems: (profile) => MenuItem[] = (profile) =>{
     
   },
   {
-    key: "project-types",
-    to: "/dashboard/project-types",
-    label: <FormattedMessage id="project-types" />,
-    icon: <FaDiagramProject   className="!text-xl" />,
-    disabled: false,
-    hidden: false,
-    
-  },
-  {
-    key: "room-zones",
-    to: "/dashboard/room-zones",
-    label: <FormattedMessage id="room-zones" />,
-    icon: <MdMeetingRoom   className="!text-xl" />,
-    disabled: false,
-    hidden: false,
-    
-  },
-  {
     key: "materials",
     to: "/dashboard/materials",
     label: <FormattedMessage id="materials" />,

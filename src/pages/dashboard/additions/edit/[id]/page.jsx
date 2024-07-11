@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { Button, Form, Input, message } from 'antd';
+import { Button , Form , Input , InputNumber, message , Select} from 'antd';
 import { useParams } from 'react-router-dom';
 import { useSelector } from "react-redux";
 import { useForm } from 'antd/es/form/Form';
@@ -22,13 +22,11 @@ const Page = () => {
             { headers: { Authorization: `Bearer ${idToken}` } }
         ).then((res) => {
             form.setFieldsValue({
-                id : res.data.data.id ,
                 name_en: res.data.data.name_en,
                 name_ar: res.data.data.name_ar,
                 price: res.data.data.price,
                 percentage: res.data.data.percentage,
                 category: res.data.data.category,
-                created_at: res.data.data.created_at
             });
         }).catch((err) => {
             console.error(err);
@@ -51,14 +49,22 @@ const Page = () => {
         });
     }
 
+    const categories = [
+
+        {id:1, name_en:"Outlets" , name_ar:"Outlets"} ,
+        {id:2, name_en:"AC Switch" , name_ar:"AC Switch"} ,
+        {id:3, name_en:"TELE Point" , name_ar:"TELE Point"} ,
+        {id:4, name_en:"Data Point" , name_ar:"Data Point"} ,
+        {id:5, name_en:"Bath Tub" , name_ar:"Bath Tub"} ,
+        {id:6, name_en:"Water Sink" , name_ar:"Water Sink"} ,
+        {id:7, name_en:"Water Mixer" , name_ar:"Water Mixer"} ,
+        {id:8, name_en:"Toilet Cabinet" , name_ar:"Toilet Cabinet"} ,
+        {id:9, name_en:"Water Heater" , name_ar:"Water Heater"} ,
+      ]
+
     return (
         <div>
             <Form onFinish={handler} layout='vertical' form={form}>
-                <Form.Item
-                    label={'id'} name={"id"}
-                    rules={[{ required: true, message: 'please Enter id' }]}>
-                    <Input size='large' placeholder='please Enter id' />
-                </Form.Item>
                 <Form.Item
                     label={'Name_en'} name={"name_en"}
                     rules={[{ required: true, message: 'please Enter name_en' }]}>
@@ -72,25 +78,34 @@ const Page = () => {
                 <Form.Item
                     label={'Price'} name={"price"}
                     rules={[{ required: true, message: 'please Enter price' }]}>
-                    <Input size='large' placeholder='please Enter Price' />
+                    <InputNumber className='w-[full]' size='large' placeholder='please Enter Price' />
                 </Form.Item>
                 <Form.Item
                     label={'Percentage'} name={"percentage"}
                     rules={[{ required: true, message: 'please Enter percentage' }]}>
-                    <Input size='large' placeholder='please Enter Percentage' />
+                    <InputNumber className='w-[full]' size='large' placeholder='please Enter Percentage' />
                 </Form.Item>
                 <Form.Item
-                    label={'Category'} name={"category"}
-                    rules={[{ required: true, message: 'please Enter category' }]}>
-                    <Input size='large' placeholder='please Enter Category' />
-                </Form.Item>
-                <Form.Item
-                    label={'Created_at'} name={"created_at"}
-                    rules={[{ required: true, message: 'please Enter Created_at' }]}>
-                    <Input size='large' placeholder='please Enter Created_at' />
-                </Form.Item>
+            label={'category'} name={"category"}
+            rules={[
+                {
+                    required : true,
+                    message:'please Enter category'
+                }
+                ]}>
+                <Select
+                placeholder="Select a categories"
+                loading={loading}
+              >
+                {categories.map(categories => (
+                  <Option key={categories.id} value={categories.id}>
+                    {categories.name}
+                  </Option>
+                ))}
+              </Select>
+            </Form.Item>
 
-                <Button loading={loading} htmlType='submit'>Save</Button>
+                <Button loading={loading} htmlType='submit' type='primary'>Save</Button>
             </Form>
         </div>
     )

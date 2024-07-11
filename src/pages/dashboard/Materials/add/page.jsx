@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import { useSelector } from "react-redux";
-import {Button, Upload , Form ,Input } from 'antd';
+import { Button , Form , Input , InputNumber, message , Select , Upload} from 'antd';
 import {  UploadOutlined } from '@ant-design/icons';
 
 const page = () => {
@@ -10,6 +10,21 @@ const page = () => {
     const idToken = useSelector(state => state.Auth.idToken);
 
     const navigate = useNavigate()
+
+
+
+    const categories = [
+
+        {id:1, name_en:"Outlets" , name_ar:"Outlets"} ,
+        {id:2, name_en:"AC Switch" , name_ar:"AC Switch"} ,
+        {id:3, name_en:"TELE Point" , name_ar:"TELE Point"} ,
+        {id:4, name_en:"Data Point" , name_ar:"Data Point"} ,
+        {id:5, name_en:"Bath Tub" , name_ar:"Bath Tub"} ,
+        {id:6, name_en:"Water Sink" , name_ar:"Water Sink"} ,
+        {id:7, name_en:"Water Mixer" , name_ar:"Water Mixer"} ,
+        {id:8, name_en:"Toilet Cabinet" , name_ar:"Toilet Cabinet"} ,
+        {id:9, name_en:"Water Heater" , name_ar:"Water Heater"} ,
+      ]
 
     const backHandler = () =>{
         
@@ -23,7 +38,6 @@ const page = () => {
             formData.append('price', values.price);
             formData.append('percentage', values.percentage);
             formData.append('category', values.category);
-            formData.append('created_at', values.created_at);
 
 
                 const image  = values?.material_image?.[0]?.originFileObj
@@ -55,6 +69,9 @@ const page = () => {
                 }
                 return e?.fileList;
             };
+
+
+            
 
     return (
     <div>
@@ -89,7 +106,7 @@ const page = () => {
                     message:'please Enter price'
                 }
                 ]}>
-            <Input size='large' placeholder='please Enter price' />
+            <InputNumber size='large' placeholder='please Enter price' />
             </Form.Item>
             <Form.Item
             name="material_image"
@@ -112,27 +129,26 @@ const page = () => {
                     message:'please Enter percentage'
                 }
                 ]}>
-            <Input size='large' placeholder='please Enter percentage	' />
+            <InputNumber size='large' placeholder='please Enter percentage	' />
             </Form.Item>
             <Form.Item
-            label={'Category'} name={"category"}
+            label={'category'} name={"category"}
             rules={[
                 {
                     required : true,
                     message:'please Enter category'
                 }
                 ]}>
-            <Input size='large' placeholder='please Enter category' />
-            </Form.Item>
-            <Form.Item
-            label={'Created_at'} name={"created_at"}
-            rules={[
-                {
-                    required : true,
-                    message:'please Enter Created_at'
-                }
-                ]}>
-            <Input size='large' placeholder='please Enter Created_at' />
+                <Select
+                placeholder="Select a categories"
+                loading={loading}
+              >
+                {categories.map(categories => (
+                  <Option key={categories.id} value={categories.id}>
+                    {categories.name}
+                  </Option>
+                ))}
+              </Select>
             </Form.Item>
             <Button loading={loading} htmlType='submit' type='primary'>Add</Button>
         </Form>

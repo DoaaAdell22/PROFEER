@@ -12,11 +12,7 @@ const Page = () => {
     const [loading , setLoading] =useState(false)
 
     const columns = [
-        {
-            title: 'id',
-            dataIndex: 'id',
-            key: 'id',
-        },
+
         {
             title: 'Name',
             dataIndex: 'name',
