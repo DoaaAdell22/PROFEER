@@ -12,7 +12,39 @@ const page = () => {
 
     const idToken = useSelector(state => state.Auth.idToken);
 
-  
+    const language = useSelector(state => state.LanguageSwitcher.language);
+
+   const [cate , setCate] = useState({})
+    const categories = [
+
+      {id:1, name_en:"Outlets" , name_ar:"Outlets"} ,
+      {id:2, name_en:"AC Switch" , name_ar:"AC Switch"} ,
+      {id:3, name_en:"TELE Point" , name_ar:"TELE Point"} ,
+      {id:4, name_en:"Data Point" , name_ar:"Data Point"} ,
+      {id:5, name_en:"Bath Tub" , name_ar:"Bath Tub"} ,
+      {id:6, name_en:"Water Sink" , name_ar:"Water Sink"} ,
+      {id:7, name_en:"Water Mixer" , name_ar:"Water Mixer"} ,
+      {id:8, name_en:"Toilet Cabinet" , name_ar:"Toilet Cabinet"} ,
+      {id:9, name_en:"Water Heater" , name_ar:"Water Heater"} ,
+    ]
+
+
+      useEffect(()=>{
+        axios.get(`https://backend.profferdeals.com/api/admin/additions/${params.id}` ,
+            
+            { headers : {
+                Authorization:`Bearer ${idToken}`
+                }}
+        ).then((res)=>{
+            setData(res.data.data)
+            const allCategory = categories.find((el) => el.id === res.data.data.category)
+            setCate(allCategory)
+        }).catch(()=>{})
+    },[])
+
+ 
+
+    
 
     const items = [
 
@@ -50,23 +82,11 @@ const page = () => {
           key: '3',
           label: 'category',
           span : 3 ,
-          children: data.category,
+          children: language === 'ar' ? cate.name_ar : cate.name_en ,
         },
 
         
       ];
-
-
-      useEffect(()=>{
-        axios.get(`https://backend.profferdeals.com/api/admin/additions/${params.id}` ,
-            
-            { headers : {
-                Authorization:`Bearer ${idToken}`
-                }}
-        ).then((res)=>{
-            setData(res.data.data)
-        }).catch(()=>{})
-    },[])
 
     return (
        <div>

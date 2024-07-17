@@ -12,6 +12,7 @@ const Page = () => {
     const params = useParams();
     const idToken = useSelector(state => state.Auth.idToken);
     const navigate = useNavigate();
+    const language = useSelector(state => state.LanguageSwitcher.language);
 
     const backHandler = () => {
         return navigate(-1);
@@ -99,7 +100,7 @@ const Page = () => {
               >
                 {categories.map(categories => (
                   <Option key={categories.id} value={categories.id}>
-                    {categories.name}
+                  {language === 'ar' ? categories.name_ar : categories.name_en}
                   </Option>
                 ))}
               </Select>

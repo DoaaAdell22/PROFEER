@@ -8,7 +8,8 @@ import {  UploadOutlined } from '@ant-design/icons';
 const page = () => {
     const [loading , setLoading] = useState(false)
     const idToken = useSelector(state => state.Auth.idToken);
-
+    const language = useSelector(state => state.LanguageSwitcher.language);
+    console.log(language)
     const navigate = useNavigate()
 
 
@@ -145,7 +146,7 @@ const page = () => {
               >
                 {categories.map(categories => (
                   <Option key={categories.id} value={categories.id}>
-                    {categories.name}
+                    {language === 'ar' ? categories.name_ar : categories.name_en}
                   </Option>
                 ))}
               </Select>

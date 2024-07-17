@@ -4,6 +4,7 @@ import axios from 'axios';
 import { useSelector } from "react-redux";
 import { message , Button } from 'antd';
 import {  useNavigate } from 'react-router-dom';
+import { render } from 'react-dom';
 
 const Page = () => {
     const navigate = useNavigate()
@@ -11,6 +12,21 @@ const Page = () => {
     const idToken = useSelector(state => state.Auth.idToken);
     const [click , setClick] = useState(null)
     const [loading , setLoading] =useState(false)
+    const language = useSelector(state => state.LanguageSwitcher.language);
+
+
+    const categories = [
+
+        {id:1, name_en:"Outlets" , name_ar:"Outlets"} ,
+        {id:2, name_en:"AC Switch" , name_ar:"AC Switch"} ,
+        {id:3, name_en:"TELE Point" , name_ar:"TELE Point"} ,
+        {id:4, name_en:"Data Point" , name_ar:"Data Point"} ,
+        {id:5, name_en:"Bath Tub" , name_ar:"Bath Tub"} ,
+        {id:6, name_en:"Water Sink" , name_ar:"Water Sink"} ,
+        {id:7, name_en:"Water Mixer" , name_ar:"Water Mixer"} ,
+        {id:8, name_en:"Toilet Cabinet" , name_ar:"Toilet Cabinet"} ,
+        {id:9, name_en:"Water Heater" , name_ar:"Water Heater"} ,
+      ]
 
     const columns = [
 
@@ -38,6 +54,10 @@ const Page = () => {
             title: 'Category',
             dataIndex: 'category',
             key: 'category',
+            render : (text , record ) => {
+                const allCategory = categories.find((el) => el.id === record.category)
+                return language === 'ar' ? allCategory.name_ar : allCategory.name_en
+            }
         },
 
         {

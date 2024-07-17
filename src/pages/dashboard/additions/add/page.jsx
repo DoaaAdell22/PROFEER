@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 const page = () => {
     const [loading , setLoading] = useState(false)
     const idToken = useSelector(state => state.Auth.idToken);
+    const language = useSelector(state => state.LanguageSwitcher.language);
 
 
     const navigate = useNavigate()
@@ -108,7 +109,7 @@ const page = () => {
               >
                 {categories.map(categories => (
                   <Option key={categories.id} value={categories.id}>
-                    {categories.name}
+                  {language === 'ar' ? categories.name_ar : categories.name_en}
                   </Option>
                 ))}
               </Select>

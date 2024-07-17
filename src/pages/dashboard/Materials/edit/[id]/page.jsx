@@ -11,6 +11,8 @@ const Page = () => {
     const [loading, setLoading] = useState(false);
     const params = useParams();
     const idToken = useSelector(state => state.Auth.idToken);
+    const language = useSelector(state => state.LanguageSwitcher.language);
+
     const navigate = useNavigate();
 
     const backHandler = () => {
@@ -87,20 +89,20 @@ const Page = () => {
                     <InputNumber size='large' placeholder='please Enter Percentage' />
                 </Form.Item>
                 <Form.Item
-            label={'category'} name={"category"}
-            rules={[
-                {
+                    label={'category'} name={"category"}
+                    rules={[
+                    {
                     required : true,
                     message:'please Enter category'
-                }
-                ]}>
-                <Select
-                placeholder="Select a categories"
-                loading={loading}
-              >
+                    }
+                    ]}>
+                    <Select
+                    placeholder="Select a categories"
+                    loading={loading}
+                    >
                 {categories.map(categories => (
                   <Option key={categories.id} value={categories.id}>
-                    {categories.name}
+                  {language === 'ar' ? categories.name_ar : categories.name_en}
                   </Option>
                 ))}
               </Select>
