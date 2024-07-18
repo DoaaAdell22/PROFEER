@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { Button, Form, Input, InputNumber, message, Select, Upload , Image } from 'antd';
+import { Button, Form, Input, InputNumber, message, Select, Upload  } from 'antd';
 import { useParams } from 'react-router-dom';
 import { useSelector } from "react-redux";
 import { useForm } from 'antd/es/form/Form';
@@ -11,7 +11,6 @@ import { UploadOutlined } from '@ant-design/icons';
 const Page = () => {
     const [form] = useForm();
     const [loading, setLoading] = useState(false);
-    const [photo , setPhoto] =useState({})
     const params = useParams();
     const idToken = useSelector(state => state.Auth.idToken);
     const language = useSelector(state => state.LanguageSwitcher.language);
@@ -46,7 +45,7 @@ const Page = () => {
                 category: res.data.data.category,
                 material_image: res.data.data.material_image,
             });
-            setPhoto(res.data.data.material_image)
+            
         }).catch((err) => {
             console.error(err);
         });
@@ -87,6 +86,7 @@ const Page = () => {
         return e?.fileList;
     };
 
+
     return (
         <div>
             <Form onFinish={handler} layout='vertical' form={form}>
@@ -120,12 +120,6 @@ const Page = () => {
                             </Option>
                         ))}
                     </Select>
-                </Form.Item>
-                <Form.Item label=" Image">
-                        <Image
-                            width={200}
-                            src={photo}
-                        />
                 </Form.Item>
                 <Form.Item
                     name="material_image"
