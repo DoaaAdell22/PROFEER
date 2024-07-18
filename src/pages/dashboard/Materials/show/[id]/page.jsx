@@ -58,12 +58,7 @@ const page = () => {
           span : 3 ,
           children: data.name_ar,
         },
-        {
-          key: '3',
-          label: 'Material_image',
-          span : 3 ,
-          children: <img  src={data.material_image} className='w-[100px] h-[100px]' />,
-        },
+        
         {
           key: '3',
           label: 'Price',
@@ -81,6 +76,12 @@ const page = () => {
           label: 'Category',
           span : 3 ,
           children: language === 'ar' ? cate.name_ar : cate.name_en ,
+        },
+        {
+          key: '3',
+          label: 'Material_image',
+          span : 3 ,
+          children: <img  src={data.material_image} className='w-[100px] h-[100px]' />,
         },
 
         

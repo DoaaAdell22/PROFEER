@@ -110,19 +110,6 @@ const page = () => {
             <InputNumber size='large' placeholder='please Enter price' />
             </Form.Item>
             <Form.Item
-            name="material_image"
-            label="Image"
-            valuePropName="fileList"
-            getValueFromEvent={normFile}
-          >
-            <Upload
-            maxCount={1}
-            beforeUpload={()=>false}
-            name="logo" action="/upload.do" listType="picture">
-              <Button icon={<UploadOutlined />}>Click to upload</Button>
-            </Upload>
-          </Form.Item>
-            <Form.Item
             label={'Percentage'} name={"percentage"}
             rules={[
                 {
@@ -151,6 +138,19 @@ const page = () => {
                 ))}
               </Select>
             </Form.Item>
+            <Form.Item
+            name="material_image"
+            label="Image"
+            valuePropName="fileList"
+            getValueFromEvent={normFile}
+          >
+            <Upload
+            maxCount={1}
+            beforeUpload={()=>false}
+            name="logo" action="/upload.do" listType="picture">
+              <Button icon={<UploadOutlined />}>Click to upload</Button>
+            </Upload>
+          </Form.Item>
             <Button loading={loading} htmlType='submit' type='primary'>Add</Button>
         </Form>
     </div> 
